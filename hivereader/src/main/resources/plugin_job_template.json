@@ -1,0 +1,7 @@
+{
+    "name": "hivereader",
+    "parameter": {
+        "defaultFS": "",
+        "sql": ""
+    }
+}
