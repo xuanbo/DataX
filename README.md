@@ -1,5 +1,3 @@
-![Datax-logo](https://github.com/alibaba/DataX/blob/master/images/DataX-logo.jpg)
-
 # 说明
 
 本项目基于[DataX](https://github.com/alibaba/DataX)开发插件，满足个性化需求。
@@ -8,5 +6,5 @@
 
 ### hivereader
 
-DataX官方提供的hdfsreader插件只能选择hdfs中的文件，不满足自定义sql查询的需求，因此开发了[hivereader]()。
+DataX官方提供的hdfsreader插件是基于hdfs上的文件，不能自定义sql，因此开发了[hivereader](./hivereader)插件。
 
