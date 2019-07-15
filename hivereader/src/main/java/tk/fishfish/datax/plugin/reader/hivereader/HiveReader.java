@@ -84,6 +84,8 @@ public class HiveReader extends Reader {
 
         private static final Logger LOG = LoggerFactory.getLogger(Reader.Task.class);
 
+        private static final String DOUBLE_QUOTATION  = "\"";
+
         private Configuration taskConfig = null;
         private String sql = null;
         private String tmpTableName = null;
@@ -114,9 +116,9 @@ public class HiveReader extends Reader {
         public void prepare() {
             LOG.info("prepare() begin...");
             String hiveCmd = "CREATE TABLE " + tmpTableName + " STORED AS ORCFILE LOCATION '" + tmpPath + "' AS " + sql;
-            LOG.info("prepare() hiveCmd: {}", hiveCmd);
+            LOG.info("prepare() hive cmd: {}", hiveCmd);
             try {
-                if (!ShellUtil.exec(new String[]{"hive", "-e", "\"" + hiveCmd + "\""})) {
+                if (!ShellUtil.exec(new String[]{"hive", "-e", DOUBLE_QUOTATION + hiveCmd + DOUBLE_QUOTATION})) {
                     throw DataXException.asDataXException(HiveReaderErrorCode.SHELL_ERROR, "创建hive临时表脚本执行失败");
                 }
             } catch (Exception e) {
@@ -143,10 +145,10 @@ public class HiveReader extends Reader {
         public void post() {
             LOG.info("post() begin...");
             String hiveCmd = "drop table " + tmpTableName;
-            LOG.info("post() hiveCmd: {}", hiveCmd);
+            LOG.info("post() hive cmd: {}", hiveCmd);
             // 执行脚本，删除临时表
             try {
-                if (!ShellUtil.exec(new String[]{"hive", "-e", "\"" + hiveCmd + "\""})) {
+                if (!ShellUtil.exec(new String[]{"hive", "-e", DOUBLE_QUOTATION + hiveCmd + DOUBLE_QUOTATION})) {
                     throw DataXException.asDataXException(HiveReaderErrorCode.SHELL_ERROR, "删除hive临时表脚本执行失败");
                 }
             } catch (Exception e) {

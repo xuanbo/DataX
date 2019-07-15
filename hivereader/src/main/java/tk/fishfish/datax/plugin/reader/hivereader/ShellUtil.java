@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Shell 工具累
+ * Shell 工具类
  *
  * @author dalizu on 2018/11/10.
  * @version v1.0
@@ -19,6 +19,10 @@ public class ShellUtil {
     private static final int SUCCESS = 0;
     private static final Logger LOG = LoggerFactory.getLogger(ShellUtil.class);
 
+    private ShellUtil() throws IllegalAccessException {
+        throw new IllegalAccessException("Illegal Access!");
+    }
+
     public static boolean exec(String[] command) throws Exception {
         try {
             Process process = Runtime.getRuntime().exec(command);
@@ -27,14 +31,14 @@ public class ShellUtil {
             // 等待程序执行结束并输出状态
             int exitCode = process.waitFor();
             if (exitCode == SUCCESS) {
-                LOG.info("脚本执行成功");
+                LOG.info("command exec successful");
                 return true;
             } else {
-                LOG.info("脚本执行失败: {}" + errMsg.toString());
+                LOG.info("command exec failed, error: {}", errMsg.toString());
                 return false;
             }
         } catch (Exception e) {
-            LOG.error("脚本执行失败", e);
+            LOG.error("command exec failed", e);
             throw e;
         }
     }

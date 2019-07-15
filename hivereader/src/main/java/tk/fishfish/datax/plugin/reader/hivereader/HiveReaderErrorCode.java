@@ -97,7 +97,6 @@ public enum HiveReaderErrorCode implements ErrorCode {
 
     @Override
     public String toString() {
-        return String.format("Code:[%s], Description:[%s]. ", this.code,
-                this.description);
+        return String.format("Code:[%s], Description:[%s]. ", this.code, this.description);
     }
 }
